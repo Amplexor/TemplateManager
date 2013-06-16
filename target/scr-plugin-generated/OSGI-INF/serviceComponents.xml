@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component name="amplexor.utils.templatecreator.TemplateCreatorServlet" activate="update" modified="update">
+        <implementation class="amplexor.utils.templatecreator.TemplateCreatorServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatecreator"/>
+        <property name="service.description" value="Servlet to create a template based on posted data"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="POST"/>
+        <property name="templatedesigner.customComponentsFolderName" value="custom_generated"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateCreatorServlet"/>
+        <reference name="queryBuilder" interface="com.day.cq.search.QueryBuilder" cardinality="1..1" policy="static" bind="bindQueryBuilder" unbind="unbindQueryBuilder"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateDesignCreatePageServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateDesignCreatePageServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/createpage"/>
+        <property name="service.description" value="Creates a temporary page based on a specific template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateDesignCreatePageServlet"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateDesignFindPageServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateDesignFindPageServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatedesigner/findpage"/>
+        <property name="service.description" value="Servlet to find a sample page with a specific template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateDesignFindPageServlet"/>
+        <reference name="queryBuilder" interface="com.day.cq.search.QueryBuilder" cardinality="1..1" policy="static" bind="bindQueryBuilder" unbind="unbindQueryBuilder"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateDesignReplaceServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateDesignReplaceServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/replace"/>
+        <property name="service.description" value="Servlet to create replace allowed component configuration with new configuration"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="POST"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateDesignReplaceServlet"/>
+        <reference name="queryBuilder" interface="com.day.cq.search.QueryBuilder" cardinality="1..1" policy="static" bind="bindQueryBuilder" unbind="unbindQueryBuilder"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateDesignUpdateServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateDesignUpdateServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/updatedesign"/>
+        <property name="service.description" value="Servlet to update the configurable parsys items for a specfic template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateDesignUpdateServlet"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateManagerDeleteServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateManagerDeleteServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/delete"/>
+        <property name="service.description" value="Servlet to delete a specific node"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateManagerDeleteServlet"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateManagerListServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateManagerListServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/list"/>
+        <property name="service.description" value="Servlet to list the template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateManagerListServlet"/>
+        <reference name="queryBuilder" interface="com.day.cq.search.QueryBuilder" cardinality="1..1" policy="static" bind="bindQueryBuilder" unbind="unbindQueryBuilder"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateManagerSaveServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateManagerSaveServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/save"/>
+        <property name="service.description" value="Servlet to save the list of templates"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="POST"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateManagerSaveServlet"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateManagerUpdateServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateManagerUpdateServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/update"/>
+        <property name="service.description" value="Servlet to update a specific template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="POST"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateManagerUpdateServlet"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplatePackageBackupServlet" activate="update" modified="update">
+        <implementation class="amplexor.utils.templatecreator.TemplatePackageBackupServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatemanager/backup"/>
+        <property name="process.label" value="TemplateManager Backup Process"/>
+        <property name="service.description" value="Servlet to create a backup of all templates within the CQ application"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="templatemanager.maxbackups" type="Integer" value="5"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplatePackageBackupServlet"/>
+        <reference name="repository" interface="org.apache.sling.jcr.api.SlingRepository" cardinality="1..1" policy="static" bind="bindRepository" unbind="unbindRepository"/>
+    </scr:component>
+    <scr:component name="amplexor.utils.templatecreator.TemplateParSysOverviewServlet">
+        <implementation class="amplexor.utils.templatecreator.TemplateParSysOverviewServlet"/>
+        <service servicefactory="false">
+            <provide interface="javax.servlet.Servlet"/>
+        </service>
+        <property name="sling.servlet.paths" value="/bin/templatedesigner/list"/>
+        <property name="service.description" value="Servlet to list all allowed parsys and allowed components for a template"/>
+        <property name="service.vendor" value="Amplexor"/>
+        <property name="sling.servlet.methods" value="GET"/>
+        <property name="service.pid" value="amplexor.utils.templatecreator.TemplateParSysOverviewServlet"/>
+        <reference name="queryBuilder" interface="com.day.cq.search.QueryBuilder" cardinality="1..1" policy="static" bind="bindQueryBuilder" unbind="unbindQueryBuilder"/>
+    </scr:component>
+</components>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+    <OCD id="amplexor.utils.templatecreator.TemplatePackageBackupServlet" name="%amplexor.utils.templatecreator.TemplatePackageBackupServlet.name" description="%amplexor.utils.templatecreator.TemplatePackageBackupServlet.description">
+        <AD id="sling.servlet.paths" type="String" default="/bin/templatemanager/backup" name="%sling.servlet.paths.name" description="%sling.servlet.paths.description"/>
+        <AD id="process.label" type="String" default="TemplateManager Backup Process" name="%process.label.name" description="%process.label.description"/>
+        <AD id="sling.servlet.methods" type="String" default="GET" name="%sling.servlet.methods.name" description="%sling.servlet.methods.description"/>
+        <AD id="templatemanager.maxbackups" type="Integer" default="5" name="maxbackups" description="Maximum amount of Template backups to store"/>
+    </OCD>
+    <Designate pid="amplexor.utils.templatecreator.TemplatePackageBackupServlet">
+        <Object ocdref="amplexor.utils.templatecreator.TemplatePackageBackupServlet"/>
+    </Designate>
+</metatype:MetaData>

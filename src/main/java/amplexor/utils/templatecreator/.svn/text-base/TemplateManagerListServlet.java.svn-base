@@ -1,0 +1,137 @@
+package amplexor.euroclear.contact;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
+import org.apache.sling.commons.json.JSONException;
+import org.apache.sling.commons.json.io.JSONWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.Hit;
+import com.day.cq.search.result.SearchResult;
+import com.day.cq.tagging.Tag;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonWriter;
+import java.lang.reflect.Type;
+
+/*
+ * Servlet to get all contacts as json (correct json to use in a select box).
+ */
+@Component
+@Service(Servlet.class)
+@Properties({
+        @Property(name = "sling.servlet.paths", value = "/bin/euroclear/contacts"),
+        @Property(name = "sling.servlet.methods", value = {"GET"})
+})
+public class ContactValuesServlet extends SlingSafeMethodsServlet {
+	private final static Logger logger = LoggerFactory.getLogger(ContactValuesServlet.class);
+
+	@Reference
+    private QueryBuilder queryBuilder;
+    
+    @Override
+    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        ResourceResolver resourceResolver = request.getResourceResolver();
+        try {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+        
+            List<Contact> contactValues = retrieveContacts(resourceResolver.adaptTo(Session.class));            
+            if (contactValues == null) {
+                response.getWriter().println("[{}]");
+            } else {
+                JsonWriter jsonWriter = null;
+                
+                try {
+                    jsonWriter = new JsonWriter(response.getWriter());
+                    writeJsonContactValues(contactValues, jsonWriter);
+                } finally {
+                    if (jsonWriter != null) {
+                        jsonWriter.close();
+                    }
+                }
+                
+            }
+            response.getWriter().flush();
+            
+        } catch (RepositoryException e) {
+            logger.warn("could not get resources", e);
+        } catch (JSONException e) {
+            logger.warn("problem writing json", e);
+        }
+    }
+    
+    private void writeJsonValues(List<Map<String, String>> results, JsonWriter jsonWriter) throws JSONException {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+        Type jsonType = new TypeToken<List<Map<String, String>>>(){}.getType();
+        gson.toJson(results,jsonType,jsonWriter);
+	}
+
+    private void writeJsonContactValues(List<Contact> contacts, JsonWriter jsonWriter) throws JSONException {
+    	Map<String,String> contactMap; 
+        List<Map<String, String>> results = new ArrayList<Map<String, String>>();
+        
+		for (Contact contact : contacts) {
+            contactMap = new HashMap<String, String>();
+            contactMap.put("value", contact.getPath());
+            contactMap.put("text", contact.getTitle());
+            results.add(contactMap);
+		}
+        
+        writeJsonValues(results, jsonWriter);
+	}
+
+    private List<Contact> retrieveContacts(Session session) throws RepositoryException {
+    	List<Contact> contacts = new ArrayList<Contact>();
+    	
+		Map<String, String> queryMap = new HashMap<String, String>();
+		queryMap.put("path", "/content");		
+		queryMap.put("type", "cq:Page");
+		queryMap.put("property", "jcr:content/sling:resourceType");
+		queryMap.put("property.value", "euroclear/components/page/modules/contact");
+		queryMap.put("orderby", "@jcr:content/jcr:title");
+        queryMap.put("orderby.index", "true");
+        queryMap.put("orderby.sort", "asc");
+
+		Query query = queryBuilder.createQuery(PredicateGroup.create(queryMap), session);
+        query.setHitsPerPage(0);
+		SearchResult result = query.getResult();
+		List<Hit> hits = result.getHits();
+    	for (Hit hit : hits) {
+    	    Resource resource = hit.getResource();
+    	    Contact contact = new Contact(resource);
+    	    contacts.add(contact);
+    	}
+    	
+    	return contacts;
+    }
+}

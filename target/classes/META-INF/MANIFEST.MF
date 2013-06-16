@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Export-Package: amplexor.utils.templatecreator;uses:="javax.jcr,org.ap
+ ache.sling.api.request,javax.jcr.version,javax.jcr.nodetype,com.day.c
+ q.search,org.osgi.service.component,org.slf4j,javax.jcr.lock,org.apac
+ he.sling.api.resource,org.apache.commons.lang,org.apache.sling.api.se
+ rvlets,javax.servlet,javax.imageio,com.day.cq.wcm.api,com.day.cq.comm
+ ons.jcr,org.apache.sling.api,com.day.cq.search.result,org.apache.slin
+ g.jcr.api,com.day.jcr.vault.fs.api,com.day.jcr.vault.packaging,com.da
+ y.jcr.vault.fs.config";version="1.0.23"
+Service-Component: OSGI-INF/serviceComponents.xml
+Bundle-ClassPath: .,gson-2.1.jar
+Built-By: ruben.thys
+Tool: Bnd-1.43.0
+Bundle-Name: TemplateManager
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_37
+Bundle-Version: 1.0.23
+Bnd-LastModified: 1357488721241
+Bundle-ManifestVersion: 2
+Import-Package: com.day.cq.commons.jcr,com.day.cq.search,com.day.cq.se
+ arch.result,com.day.cq.wcm.api,com.day.jcr.vault.fs.api;version="[2.4
+ ,3)",com.day.jcr.vault.fs.config;version="[2.4,3)",com.day.jcr.vault.
+ packaging;version="[2.4,3)",javax.imageio,javax.jcr;version="[2.0,3)"
+ ,javax.jcr.lock;version="[2.0,3)",javax.jcr.nodetype;version="[2.0,3)
+ ",javax.jcr.version;version="[2.0,3)",javax.servlet,org.apache.common
+ s.lang;version="[2.4,3)",org.apache.sling.api;version="[2.1,3)",org.a
+ pache.sling.api.request;version="[2.1,3)",org.apache.sling.api.resour
+ ce;version="[2.1,3)",org.apache.sling.api.servlets;version="[2.1,3)",
+ org.apache.sling.jcr.api;version="[2.1,3)",org.osgi.service.component
+ ;version="[1.1,2)",org.slf4j;version="[1.6,2)"
+Embed-Dependency: gson
+Bundle-SymbolicName: com.amplexor.utils.templatemanager
+

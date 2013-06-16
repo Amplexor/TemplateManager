@@ -1,0 +1,35 @@
+10
+
+dir
+0
+https://ruben.thys@scm.amplexor.com/svn/euroclear/cq/trunk/autoimporter/src/main/java/amplexor/utils
+https://ruben.thys@scm.amplexor.com/svn/euroclear
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2f22c497-372c-7a4f-b41b-16a73454a208
+
+templatecreator
+dir
+
+
+
+add
+
