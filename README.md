@@ -1,8 +1,8 @@
-# TemplateManager for CQ5
+# TemplateManager for CQ5 (AEM)
 
 ## Introduction
 
-The 'TemplateManager for Adobe CQ5' is a tool which allows (business) administrators to easily create, manage and configure templates.
+The 'TemplateManager for Adobe CQ5' (Adobe AEM) is a tool which allows (business) administrators to easily create, manage and configure templates.
 
 Learn what this tool can do using in following promo/tutorial videos:
 - "Create a new template" : http://www.youtube.com/watch?v=kwU6yK_Xz5U
@@ -12,7 +12,7 @@ Learn what this tool can do using in following promo/tutorial videos:
 
 ## Requirements
 
-* CQ 5.5+ 
+* Tested on Adobe AEM/CQ 5.5 and above 
 
 ## Installation
 
